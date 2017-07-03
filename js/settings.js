@@ -3,5 +3,5 @@ export default {
     width: 1024,
     height: 408
   },
-  gravity: 5
+  gravity: 10
 }

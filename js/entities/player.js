@@ -6,8 +6,7 @@ export default {
   y: 0,
   width: 32,
   height: 32,
-  jump: 256,
-  verticalSpeed: 0,
+  jumpSpeed: 256,
   init: function () {
     this.ready = false
     this.image = new Image()
@@ -19,5 +18,16 @@ export default {
   reset: function () {
     this.x = settings.canvas.width / 2
     this.y = settings.canvas.height / 2
+    this.horizontalSpeed = 0
+    this.verticalSpeed = 0
+  },
+  jump: function () {
+    this.verticalSpeed = this.jumpSpeed
+  },
+  goLeft: function () {
+    this.horizontalSpeed = -this.speed
+  },
+  goRight: function () {
+    this.horizontalSpeed = this.speed
   }
 }

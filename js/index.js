@@ -7,6 +7,7 @@ import ground from './entities/ground'
 
 const entities = []
 entities.push(player)
+entities.push(ground)
 
 var w = window
 
@@ -32,6 +33,8 @@ function reset () {
 }
 
 var update = function (modifier) {
+  // todo physics.fall
+  // todo physics.friction
   player.verticalSpeed -= settings.gravity
   player.y -= player.verticalSpeed * modifier
 
@@ -48,21 +51,17 @@ var update = function (modifier) {
   }
 
   if (38 in keysDown || 32 in keysDown) { // Player holding up
-    if (isOnGround(player)) {
-      player.verticalSpeed = player.jump
-    }
+    player.jump()
   }
+
+  player.x += player.horizontalSpeed * modifier
 
   if (37 in keysDown) { // Player holding left
-    player.x -= player.speed * modifier
+    player.goLeft()
   }
   if (39 in keysDown) { // Player holding right
-    player.x += player.speed * modifier
+    player.goRight()
   }
-}
-
-function isOnGround (player) {
-  return player.y === ground.y - player.height
 }
 
 var render = function () {

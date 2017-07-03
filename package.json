@@ -21,6 +21,6 @@
   "dependencies": {
     "babel-core": "^6.25.0",
     "webpack": "^3.0.0",
-    "http-server": "*"
+    "http-server": "^0.10.0"
   }
 }

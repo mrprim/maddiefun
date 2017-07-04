@@ -1,33 +1,10 @@
-export default function update (modifier, player) {
-//  if (!isOnGround(player)) {
-  player.verticalSpeed -= gravity
-  player.y -= player.verticalSpeed * modifier
-//  }
+import physics from './physics'
+import { handlePlayerInputs } from './controls'
 
-  if (player.y >= groundLine - player.height) {
-    player.y = groundLine - player.height
-  }
+export default function (mod, game) {
+  const { entities } = game
 
-  if (player.x < 0) {
-    player.x = canvas.width
-  }
+  entities.forEach(e => physics(e, mod, game))
 
-  if (player.x > canvas.width) {
-    player.x = 0
-  }
-
-  if (38 in keysDown || 32 in keysDown) { // Player holding up
-    if (isOnGround(player)) {
-      player.verticalSpeed = player.jump
-    }
-  }
-
-  if (37 in keysDown) { // Player holding left
-    player.x -= player.speed * modifier
-  }
-  if (39 in keysDown) { // Player holding right
-    player.x += player.speed * modifier
-  }
-
-  console.log(keysDown)
+  handlePlayerInputs(game)
 }

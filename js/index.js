@@ -1,91 +1,55 @@
-// import { requestAnimationFrame } from './shim.js'
+import { requestAnimationFrame } from './shim.js'
 import * as canvas from './canvas'
-import settings from './settings'
+import { registerControls } from './controls'
+import update from './update'
 
-import player from './entities/player'
-import ground from './entities/ground'
+import Player from './entities/Player'
+import Ground from './entities/Ground'
+import Scoreboard from './entities/Scoreboard'
 
-const entities = []
-entities.push(player)
-entities.push(ground)
+const player = new Player()
+const ground = new Ground()
+const platform = new Ground()
+platform.x = 150
+platform.y = 360
+platform.width = 50
+platform.height = 8
+const scoreboard = new Scoreboard()
 
-var w = window
+const game = {}
+game.ctx = canvas.init()
+game.keysDown = {}
 
-var requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame
+game.score = 0
+game.player = player
+game.ground = ground
+game.entities = []
+game.entities.push(player)
+game.entities.push(ground)
+game.entities.push(platform)
+game.entities.push(scoreboard)
 
-const ctx = canvas.init()
-
-var score = 0
-
-entities.forEach(e => e.init())
-
-var keysDown = {}
-window.addEventListener('keydown', function (e) {
-  keysDown[e.keyCode] = true
-}, false)
-
-window.addEventListener('keyup', function (e) {
-  delete keysDown[e.keyCode]
-}, false)
+registerControls(game)
 
 function reset () {
-  entities.forEach(e => e.reset())
+  game.entities.forEach(e => e.reset())
 }
 
-var update = function (modifier) {
-  // todo physics.fall
-  // todo physics.friction
-  player.verticalSpeed -= settings.gravity
-  player.y -= player.verticalSpeed * modifier
-
-  if (player.y >= ground.y - player.height) {
-    player.y = ground.y - player.height
-  }
-
-  if (player.x < 0) {
-    player.x = settings.canvas.width
-  }
-
-  if (player.x > settings.canvas.width) {
-    player.x = 0
-  }
-
-  if (38 in keysDown || 32 in keysDown) { // Player holding up
-    player.jump()
-  }
-
-  player.x += player.horizontalSpeed * modifier
-
-  if (37 in keysDown) { // Player holding left
-    player.goLeft()
-  }
-  if (39 in keysDown) { // Player holding right
-    player.goRight()
-  }
+function render () {
+  canvas.clear(game.ctx)
+  game.entities.forEach(e => e.render(game))
 }
 
-var render = function () {
-  canvas.clear(ctx)
-  entities.forEach(e => e.render(ctx))
-  ground.render(ctx)
-
-  ctx.fillStyle = 'rgb(0, 0, 0)'
-  ctx.font = '24px Helvetica'
-  ctx.textAlign = 'left'
-  ctx.textBaseline = 'top'
-  ctx.fillText('Score: ' + score, 32, 32)
-}
-
-var main = function () {
+function main () {
   var now = Date.now()
   var delta = now - then
 
-  update(delta / 1000)
+  update(delta / 1000, game)
   render()
 
   then = now
 
-  requestAnimationFrame(main)
+  requestAnimationFrame.call(window, main)
 }
 
 // Let's play this game!

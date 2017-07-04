@@ -9,8 +9,8 @@
     "start": "http-server"
   },
   "engines": {
-    "npm": ">=3",
-    "node": ">=5"
+    "npm": "3",
+    "node": "5"
   },
   "repository": {
     "type": "git",

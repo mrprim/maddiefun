@@ -1,7 +1,7 @@
-import Entity from './Entity'
+import SolidEntity from './SolidEntity'
 import settings from '../settings'
 
-export default class Player extends Entity {
+export default class Player extends SolidEntity {
   constructor () {
     super()
     this.speed = 256
@@ -31,10 +31,14 @@ export default class Player extends Entity {
   }
 
   goLeft () {
-    this.speedH = -this.speed
+    if (this.supported) {
+      this.speedH = -this.speed
+    }
   }
 
   goRight () {
-    this.speedH = this.speed
+    if (this.supported) {
+      this.speedH = this.speed
+    }
   }
 }

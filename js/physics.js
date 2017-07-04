@@ -1,11 +1,16 @@
 import settings from './settings'
 
-const gravityMod = 256
+const gravityMod = 500
 const frictionMod = 20
 
-export const move = (entity, mod) => {
+export const move = (entity, mod, game) => {
+  const origin = entity.getPosition()
+  if (entity.immovable) {
+    return
+  }
   moveHorizontal(entity, mod)
   moveVertical(entity, mod)
+  detectCollisions(entity, origin, game)
 }
 
 export const moveHorizontal = (entity, mod) => {
@@ -26,6 +31,9 @@ export const fall = (entity, mod) => {
 }
 
 export const friction = (entity, mod) => {
+  if (!entity.supported) {
+    return
+  }
   const direction = entity.speedH > 0 ? 1 : entity.speedH < 0 ? -1 : 0
 
   if (direction === 1) {
@@ -39,35 +47,63 @@ export const friction = (entity, mod) => {
   }
 }
 
-export const detectCollisions = (entity, mod, game) => {
-  detectVerticalCollisions(entity, mod, game)
+export const detectCollisions = (entity, origin, game) => {
+  detectHorizontalCollisions(entity, origin, game)
+  detectVerticalCollisions(entity, origin, game)
 }
 
-export const detectVerticalCollisions = (entity, mod, game) => {
+export const detectHorizontalCollisions = (entity, origin, game) => {
   const { entities } = game
 
-  entity.supported = false
   entities.forEach((e, game) => {
-    const entityTop = entity.y
-    const entityBottom = entity.y + entity.height
-    const entityLeft = entity.x
-    const entityRight = entity.x + entity.width
-
     if (e === entity) {
       return
     }
 
-    if (entityBottom >= e.y && entityTop <= e.y && entityLeft > e.x && entityRight < e.x + e.width) {
-      entity.supported = true
-      entity.y = e.y - entity.height
+    if (origin.top > e.getBottom() || origin.bottom < e.getTop()) {
+      return
+    }
+
+    if (origin.right <= e.getLeft() && entity.getRight() >= e.getLeft()) {
+      entity.onCollision('right', e)
+      e.onCollidedWith('left', entity)
+    }
+
+    if (origin.left >= e.getRight() && entity.getLeft() <= e.getRight()) {
+      entity.onCollision('left', e)
+      e.onCollidedWith('right', entity)
+    }
+  })
+}
+
+export const detectVerticalCollisions = (entity, origin, game) => {
+  const { entities } = game
+
+  entity.supported = false
+  entities.forEach((e, game) => {
+    if (e === entity) {
+      return
+    }
+
+    if (origin.left > e.getRight() || origin.right < e.getLeft()) {
+      return
+    }
+
+    if (origin.bottom <= e.getTop() && entity.getBottom() >= e.getTop()) {
+      entity.onCollision('bottom', e)
+      e.onCollidedWith('top', entity)
+    }
+
+    if (origin.top >= e.getBottom() && entity.getTop() <= e.getBottom()) {
+      entity.onCollision('top', e)
+      e.onCollidedWithV('bottom', entity)
     }
   })
 }
 
 export default (entity, mod, game) => {
   const { player } = game
-  detectCollisions(entity, mod, game)
-  move(entity, mod)
+  move(entity, mod, game)
   fall(entity, mod)
   friction(entity, mod)
 

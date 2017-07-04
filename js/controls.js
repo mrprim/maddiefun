@@ -12,6 +12,10 @@ export const registerControls = function (game) {
 export const handlePlayerInputs = function (game) {
   const { keysDown, player } = game
 
+  if (27 in keysDown) { // Player holding Esc
+    game.reset()
+  }
+
   if (38 in keysDown || 32 in keysDown) { // Player holding up
     player.jump(game)
   }

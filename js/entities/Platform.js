@@ -11,9 +11,10 @@ export default class Platform extends SolidEntity {
     this.immovable = true
   }
 
-  onCollidedWithLeft (collider) {
-    collider.setRight(this.getLeft())
-    collider.speedH = collider.speedH * -1
+  onCollidedWithTop (collider) {
+    collider.supported = true
+    collider.setBottom(this.getTop())
+    collider.speedV = collider.speedV * -0.6
   }
 
   render (game) {

@@ -1,7 +1,7 @@
-import settings from './settings'
+import { canvasWidth } from './canvas'
 
-const gravityMod = 500
-const frictionMod = 20
+const gravityMod = 30
+const frictionMod = 15
 
 export const move = (entity, mod, game) => {
   const origin = entity.getPosition()
@@ -21,13 +21,13 @@ export const moveVertical = (entity, mod) => {
   entity.y -= entity.speedV * mod
 }
 
-export const fall = (entity, mod) => {
+export const fall = (entity) => {
   if (entity.hover) return
   if (entity.supported) {
     entity.speedV = entity.speedV > 0 ? entity.speedV : 0
     return
   }
-  entity.speedV -= gravityMod * mod
+  entity.speedV -= gravityMod
 }
 
 export const friction = (entity, mod) => {
@@ -108,10 +108,10 @@ export default (entity, mod, game) => {
   friction(entity, mod)
 
   if (player.x < 0) {
-    player.x = settings.canvas.width
+    player.x = canvasWidth
   }
 
-  if (player.x > settings.canvas.width) {
+  if (player.x > canvasWidth) {
     player.x = 0
   }
 }

@@ -34,14 +34,18 @@ function render () {
 }
 
 function main () {
-  var now = Date.now()
-  var delta = now - then
+  const timestep = 1000 / 60
+  const now = Date.now()
+  let delta = now - then
 
-  update(delta / 1000, game)
+  while (delta >= timestep) {
+    update(delta / 1000, game)
+    delta -= timestep
+  }
+
   render()
 
   then = now
-
   requestAnimationFrame.call(window, main)
 }
 

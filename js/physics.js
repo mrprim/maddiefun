@@ -96,7 +96,7 @@ export const detectVerticalCollisions = (entity, origin, game) => {
 
     if (origin.top >= e.getBottom() && entity.getTop() <= e.getBottom()) {
       entity.onCollision('top', e)
-      e.onCollidedWithV('bottom', entity)
+      e.onCollidedWith('bottom', entity)
     }
   })
 }

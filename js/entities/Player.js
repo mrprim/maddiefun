@@ -4,7 +4,8 @@ import settings from '../settings'
 export default class Player extends SolidEntity {
   constructor () {
     super()
-    this.speed = 256
+    this.acceleration = 25
+    this.maxSpeed = 256
     this.width = 32
     this.height = 32
     this.jumpSpeed = 256
@@ -32,13 +33,15 @@ export default class Player extends SolidEntity {
 
   goLeft () {
     if (this.supported) {
-      this.speedH = -this.speed
+      this.speedH = this.speedH - this.acceleration
+      this.speedH = this.speedH < -this.maxSpeed ? -this.maxSpeed : this.speedH
     }
   }
 
   goRight () {
     if (this.supported) {
-      this.speedH = this.speed
+      this.speedH = this.speedH + this.acceleration
+      this.speedH = this.speedH > this.maxSpeed ? this.maxSpeed : this.speedH
     }
   }
 }

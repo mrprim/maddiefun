@@ -8,10 +8,12 @@ export default class Level0 extends Level {
     const p1 = new Platform(150, 360, 175, 64)
     const p2 = new Platform(400, 380, 275, 44)
     const p3 = new Platform(500, 310, 50, 5)
+    const p4 = new Platform(0, 300, 600, 5)
 
     this.entities.push(p0)
     this.entities.push(p1)
     this.entities.push(p2)
     this.entities.push(p3)
+    this.entities.push(p4)
   }
 }

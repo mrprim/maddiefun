@@ -10,8 +10,11 @@ export default class Entity {
   }
   render (game) {}
   reset (game) {}
-  onCollision (side, collidedWith) {}
-  onCollidedWith (side, collider) {}
+  destroy () {
+    this.inactive = true
+  }
+  onCollision (side, collidedWith, game) {}
+  onCollidedWith (side, collider, game) {}
   getTop () { return this.y }
   setTop (pos) { this.y = pos }
 

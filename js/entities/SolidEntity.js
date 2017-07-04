@@ -22,7 +22,7 @@ export default class SolidEntity extends Entity {
     collider.speedH = 0
   }
 
-  onCollidedWith (side, collider) {
+  onCollidedWith (side, collider, game) {
     if (side === 'top') this.onCollidedWithTop(collider)
     if (side === 'bottom') this.onCollidedWithBottom(collider)
     if (side === 'left') this.onCollidedWithLeft(collider)

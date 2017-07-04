@@ -53,9 +53,9 @@ export const detectCollisions = (entity, origin, game) => {
 }
 
 export const detectHorizontalCollisions = (entity, origin, game) => {
-  const { entities } = game
+  const entities = game.activeEntities()
 
-  entities.forEach((e, game) => {
+  entities.forEach((e) => {
     if (e === entity) {
       return
     }
@@ -65,22 +65,22 @@ export const detectHorizontalCollisions = (entity, origin, game) => {
     }
 
     if (origin.right <= e.getLeft() && entity.getRight() >= e.getLeft()) {
-      entity.onCollision('right', e)
-      e.onCollidedWith('left', entity)
+      entity.onCollision('right', e, game)
+      e.onCollidedWith('left', entity, game)
     }
 
     if (origin.left >= e.getRight() && entity.getLeft() <= e.getRight()) {
-      entity.onCollision('left', e)
-      e.onCollidedWith('right', entity)
+      entity.onCollision('left', e, game)
+      e.onCollidedWith('right', entity, game)
     }
   })
 }
 
 export const detectVerticalCollisions = (entity, origin, game) => {
-  const { entities } = game
+  const entities = game.activeEntities()
 
   entity.supported = false
-  entities.forEach((e, game) => {
+  entities.forEach((e) => {
     if (e === entity) {
       return
     }
@@ -90,13 +90,13 @@ export const detectVerticalCollisions = (entity, origin, game) => {
     }
 
     if (origin.bottom <= e.getTop() && entity.getBottom() >= e.getTop()) {
-      entity.onCollision('bottom', e)
-      e.onCollidedWith('top', entity)
+      entity.onCollision('bottom', e, game)
+      e.onCollidedWith('top', entity, game)
     }
 
     if (origin.top >= e.getBottom() && entity.getTop() <= e.getBottom()) {
-      entity.onCollision('top', e)
-      e.onCollidedWith('bottom', entity)
+      entity.onCollision('top', e, game)
+      e.onCollidedWith('bottom', entity, game)
     }
   })
 }

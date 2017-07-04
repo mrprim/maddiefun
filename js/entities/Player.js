@@ -4,7 +4,7 @@ import { canvasWidth } from '../canvas'
 export default class Player extends SolidEntity {
   constructor () {
     super()
-    this.acceleration = 25
+    this.acceleration = 35
     this.maxSpeed = 256
     this.width = 32
     this.height = 32
@@ -28,7 +28,6 @@ export default class Player extends SolidEntity {
   jump (game) {
     if (this.supported) {
       this.speedV = this.jumpSpeed
-      game.score += 1
     }
   }
 

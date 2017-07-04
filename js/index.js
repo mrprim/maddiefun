@@ -21,7 +21,9 @@ game.entities = []
 game.entities.push(player)
 game.entities = game.entities.concat(level.entities)
 game.entities.push(scoreboard)
-
+game.activeEntities = function () {
+  return this.entities.filter((e) => !e.inactive)
+}
 game.reset = () => {
   game.entities.forEach(e => e.reset())
 }
@@ -30,7 +32,7 @@ registerControls(game)
 
 function render () {
   canvas.clear(game.ctx)
-  game.entities.forEach(e => e.render(game))
+  game.activeEntities().forEach(e => e.render(game))
 }
 
 function main () {

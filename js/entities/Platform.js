@@ -11,12 +11,6 @@ export default class Platform extends SolidEntity {
     this.immovable = true
   }
 
-  onCollidedWithTop (collider) {
-    collider.supported = true
-    collider.setBottom(this.getTop())
-    collider.speedV = collider.speedV * -0.6
-  }
-
   render (game) {
     const { ctx } = game
 

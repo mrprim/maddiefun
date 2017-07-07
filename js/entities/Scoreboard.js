@@ -9,6 +9,5 @@ export default class Scoreboard extends Overlay {
     ctx.textAlign = 'left'
     ctx.textBaseline = 'top'
     ctx.fillText('Score: ' + score, 32, 32)
-    ctx.fillText('Time: ' + Math.floor(clock / 60), 32, 64)
   }
 }

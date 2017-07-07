@@ -18,9 +18,6 @@ export default class Gem extends Entity {
     game.score += 1
     this.destroy()
 
-    var g = new Gem()
-    g.setTop(170)
-    g.setLeft(Math.floor(Math.random() * 424 + 1))
-    game.entities.push(g)
+    game.level.spawnGem(game)
   }
 }

@@ -1,4 +1,4 @@
-import { canvasWidth } from './canvas'
+import { canvasWidth, canvasHeight } from './canvas'
 
 const gravityMod = 30
 const frictionMod = 15
@@ -113,5 +113,9 @@ export default (entity, mod, game) => {
 
   if (player.x > canvasWidth) {
     player.x = 0
+  }
+
+  if (player.y > canvasHeight) {
+    player.y = 0
   }
 }

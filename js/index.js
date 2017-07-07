@@ -15,6 +15,7 @@ game.ctx = canvas.init()
 game.keysDown = {}
 
 game.score = 0
+game.clock = 0
 game.player = player
 game.level = level
 game.entities = []
@@ -43,6 +44,7 @@ function main () {
   while (delta >= timestep) {
     update(delta / 1000, game)
     delta -= timestep
+    game.clock += 1
   }
 
   render()

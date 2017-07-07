@@ -1,3 +1,5 @@
+import { canvasHeight } from '../canvas'
+
 export default class Entity {
   constructor () {
     this.x = 0
@@ -8,7 +10,6 @@ export default class Entity {
     this.height = 0
     this.width = 0
   }
-  render (game) {}
   reset (game) {}
   destroy () {
     this.inactive = true
@@ -20,7 +21,6 @@ export default class Entity {
 
   getBottom () { return this.y + this.height }
   setBottom (pos) { this.y = pos - this.height }
-
   getLeft () { return this.x }
   setLeft (pos) { this.x = pos }
 
@@ -34,5 +34,11 @@ export default class Entity {
       left: this.getLeft(),
       right: this.getRight()
     }
+  }
+
+  render (game) {
+    const { ctx } = game
+    ctx.drawImage(this.image, this.x, this.y)
+    ctx.strokeRect(this.x, this.y, this.width, this.height)
   }
 }

@@ -10,11 +10,6 @@ export default class Gem extends Entity {
     this.image.src = 'assets/gem.png'
   }
 
-  render (game) {
-    const { ctx } = game
-    ctx.drawImage(this.image, this.x, this.y)
-  }
-
   reset () {
 
   }

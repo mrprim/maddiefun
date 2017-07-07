@@ -13,11 +13,6 @@ export default class Player extends SolidEntity {
     this.image.src = 'assets/player.png'
   }
 
-  render (game) {
-    const { ctx } = game
-    ctx.drawImage(this.image, this.x, this.y)
-  }
-
   reset () {
     this.x = canvasWidth / 2
     this.y = -40

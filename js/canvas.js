@@ -1,5 +1,5 @@
-export const canvasWidth = 512
-export const canvasHeight = 408
+export const canvasWidth = 1000
+export const canvasHeight = 500
 
 export function init () {
   const canvas = document.createElement('canvas')

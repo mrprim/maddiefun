@@ -64,12 +64,12 @@ export const detectHorizontalCollisions = (entity, origin, game) => {
       return
     }
 
-    if (origin.right <= e.getLeft() && entity.getRight() >= e.getLeft()) {
+    if (origin.right <= e.getLeft() && entity.getRight() > e.getLeft()) {
       entity.onCollision('right', e, game)
       e.onCollidedWith('left', entity, game)
     }
 
-    if (origin.left >= e.getRight() && entity.getLeft() <= e.getRight()) {
+    if (origin.left >= e.getRight() && entity.getLeft() < e.getRight()) {
       entity.onCollision('left', e, game)
       e.onCollidedWith('right', entity, game)
     }
@@ -85,16 +85,16 @@ export const detectVerticalCollisions = (entity, origin, game) => {
       return
     }
 
-    if (origin.left > e.getRight() || origin.right < e.getLeft()) {
+    if (origin.left >= e.getRight() || origin.right <= e.getLeft()) {
       return
     }
 
-    if (origin.bottom <= e.getTop() && entity.getBottom() >= e.getTop()) {
+    if (origin.bottom <= e.getTop() && entity.getBottom() > e.getTop()) {
       entity.onCollision('bottom', e, game)
       e.onCollidedWith('top', entity, game)
     }
 
-    if (origin.top >= e.getBottom() && entity.getTop() <= e.getBottom()) {
+    if (origin.top >= e.getBottom() && entity.getTop() < e.getBottom()) {
       entity.onCollision('top', e, game)
       e.onCollidedWith('bottom', entity, game)
     }

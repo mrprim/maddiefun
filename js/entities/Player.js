@@ -30,12 +30,18 @@ export default class Player extends SolidEntity {
     if (this.supported) {
       this.speedH = this.speedH - this.acceleration
       this.speedH = this.speedH < -this.maxSpeed ? -this.maxSpeed : this.speedH
+    } else {
+      this.speedH = this.speedH - this.acceleration * 0.25
+      this.speedH = this.speedH < -this.maxSpeed ? -this.maxSpeed : this.speedH
     }
   }
 
   goRight () {
     if (this.supported) {
       this.speedH = this.speedH + this.acceleration
+      this.speedH = this.speedH > this.maxSpeed ? this.maxSpeed : this.speedH
+    } else {
+      this.speedH = this.speedH + this.acceleration * 0.25
       this.speedH = this.speedH > this.maxSpeed ? this.maxSpeed : this.speedH
     }
   }

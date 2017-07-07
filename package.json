@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "http-server | webpack -d --watch",
+    "dev": "http-server -p 3002 | webpack -d --watch",
     "postinstall": "webpack",
     "start": "http-server"
   },

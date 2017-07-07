@@ -7,11 +7,7 @@ export default class Gem extends Entity {
     this.width = 32
     this.height = 32
     this.image = new Image()
-    this.image.src = 'assets/gem.png'
-  }
-
-  reset () {
-
+    this.image.src = 'assets/sprites/Gem/gem_default_0.png'
   }
 
   onCollidedWith (side, collider, game) {

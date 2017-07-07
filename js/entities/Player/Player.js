@@ -1,5 +1,6 @@
-import SolidEntity from './SolidEntity'
-import { canvasWidth } from '../canvas'
+import sprite from './sprite'
+import SolidEntity from '../SolidEntity'
+import { canvasWidth } from '../../canvas'
 
 export default class Player extends SolidEntity {
   constructor () {
@@ -9,8 +10,15 @@ export default class Player extends SolidEntity {
     this.width = 32
     this.height = 32
     this.jumpSpeed = 650
-    this.image = new Image()
-    this.image.src = 'assets/player.png'
+    this.sprite = sprite(this)
+  }
+
+  render (game) {
+    const { ctx } = game
+
+    this.image = this.sprite.next().value
+    ctx.drawImage(this.image, this.x, this.y)
+//    ctx.strokeRect(this.x, this.y, this.width, this.height)
   }
 
   reset () {

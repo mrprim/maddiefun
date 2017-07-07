@@ -3,7 +3,7 @@ import * as canvas from './canvas'
 import { registerControls } from './controls'
 import update from './update'
 
-import Player from './entities/Player'
+import Player from './entities/Player/Player'
 import Scoreboard from './entities/Scoreboard'
 import Level0 from './levels/Level0'
 

@@ -43,6 +43,7 @@ function main () {
 
   while (delta >= timestep) {
     update(delta / 1000, game)
+    translate(game)
     delta -= timestep
     game.clock += 1
   }
@@ -51,6 +52,16 @@ function main () {
 
   then = now
   requestAnimationFrame.call(window, main)
+}
+
+function translate (game) {
+  const { player } = game
+
+  const xCenter = canvas.canvasWidth / 2
+  const offset = -(xCenter - player.x)
+
+  game.offset = offset
+  // game.entities.forEach((e) => { e.x = e.x - game.offset })
 }
 
 // Let's play this game!

@@ -106,13 +106,12 @@ export default (entity, mod, game) => {
   move(entity, mod, game)
   fall(entity, mod)
   friction(entity, mod)
-
   if (player.x < 0) {
-    player.x = canvasWidth
+    player.x = 0
   }
 
-  if (player.x > canvasWidth) {
-    player.x = 0
+  if (player.x > game.level.width) {
+    player.x = game.level.width
   }
 
   if (player.y > canvasHeight) {

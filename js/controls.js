@@ -1,3 +1,8 @@
+const LEFT = 37
+const RIGHT = 39
+const ESC = 27
+const P = 80
+
 export const registerControls = function (game) {
   const { keysDown } = game
   window.addEventListener('keydown', function (e) {
@@ -12,23 +17,41 @@ export const registerControls = function (game) {
 export const handlePlayerInputs = function (game) {
   const { keysDown, player } = game
 
-  if (27 in keysDown) { // Player holding Esc
-    if (!game.pausePressed) {
-      game.pausePressed = true
-      game.mode = game.mode === 'pause' ? 'play' : 'pause'
-    }
-  } else {
-    game.pausePressed = false
-  }
+  pressAndHold(ESC, keysDown, () => {
+    game.reset()
+  })
+
+  pressOnce(P, keysDown, () => {
+    game.mode = game.mode === 'pause' ? 'play' : 'pause'
+  })
 
   if (38 in keysDown || 32 in keysDown) { // Player holding up
     player.jump(game)
   }
 
-  if (37 in keysDown) { // Player holding left
+  pressAndHold(LEFT, keysDown, () => {
     player.goLeft()
-  }
-  if (39 in keysDown) { // Player holding right
+  })
+
+  pressAndHold(RIGHT, keysDown, () => {
     player.goRight()
+  })
+
+  function pressOnce (keyCode, keysDown, cb) {
+    const lbl = keyCode + 'Pressed'
+    if (keyCode in keysDown) {
+      if (!keysDown[lbl]) {
+        keysDown[lbl] = true
+        cb()
+      }
+    } else {
+      delete keysDown[lbl]
+    }
+  }
+
+  function pressAndHold (keyCode, keysDown, cb) {
+    if (keyCode in keysDown) {
+      cb()
+    }
   }
 }

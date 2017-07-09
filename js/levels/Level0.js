@@ -9,7 +9,7 @@ export default class Level0 extends Level {
     this.spawnY = 0
   }
 
-  reset (game) {
+  resetEntities () {
     this.entities = [
       new Platform(0, 400, 150, 24),
       new Platform(150, 360, 175, 64),
@@ -19,11 +19,7 @@ export default class Level0 extends Level {
       new Platform(700, 300, 600, 5),
       new Gem(100, 170)
     ]
-    game.player.reset()
-    game.player.setLeft(this.spawnX)
-    game.player.setTop(this.spawnY)
   }
-
   spawnGem (game) {
     const randomLeftLocation = (gem) => {
       return Math.floor(Math.random() * (this.width - gem.width) + 1)

@@ -6,7 +6,14 @@ export default class Level {
     this.spawnY = 0
   }
 
-  reset () {
+  reset (game) {
+    this.resetEntities()
+    game.player.reset()
+    game.player.setLeft(this.spawnX)
+    game.player.setTop(this.spawnY)
+  }
+
+  resetEntities () {
     this.entities = []
   }
 }

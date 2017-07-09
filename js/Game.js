@@ -14,6 +14,7 @@ export default class Game {
     this.score = 0
     this.clock = 0
     this.keysDown = {}
+    this.mode = 'play'
   }
 
   reset () {
@@ -33,8 +34,19 @@ export default class Game {
 
   render () {
     var g = this
+    this['render' + this.mode](g)
+  }
+
+  renderplay (g) {
     canvas.clear(this.ctx)
     this.getActiveEntities().forEach(e => e.render(g))
+  }
+
+  renderpause (g) {
+    canvas.clear(this.ctx)
+    this.getActiveEntities().forEach(e => e.render(g))
+    this.ctx.fillStyle = 'rgba(12, 12, 12, .1'
+    this.ctx.fillRect(0, 0, canvas.canvasHeight, canvas.canvasWidth)
   }
 
   scroll () {

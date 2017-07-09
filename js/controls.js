@@ -13,7 +13,12 @@ export const handlePlayerInputs = function (game) {
   const { keysDown, player } = game
 
   if (27 in keysDown) { // Player holding Esc
-    game.reset()
+    if (!game.pausePressed) {
+      game.pausePressed = true
+      game.mode = game.mode === 'pause' ? 'play' : 'pause'
+    }
+  } else {
+    game.pausePressed = false
   }
 
   if (38 in keysDown || 32 in keysDown) { // Player holding up

@@ -23,6 +23,7 @@ function main () {
     missedFrames++
 
     if (missedFrames > 256) {
+      game.mode = 'pause'
       delta = 0
     }
   }

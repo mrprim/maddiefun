@@ -14,10 +14,10 @@ export default class Player extends SolidEntity {
   }
 
   render (game) {
-    const { ctx } = game
+    const { ctx, offsetX } = game
 
     this.image = this.sprite.next().value
-    ctx.drawImage(this.image, this.x, this.y)
+    ctx.drawImage(this.image, this.x - offsetX, this.y)
 //    ctx.strokeRect(this.x, this.y, this.width, this.height)
   }
 

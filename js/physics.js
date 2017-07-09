@@ -102,16 +102,16 @@ export const detectVerticalCollisions = (entity, origin, game) => {
 }
 
 export default (entity, mod, game) => {
-  const { player } = game
+  const { player, offsetX } = game
   move(entity, mod, game)
   fall(entity, mod)
   friction(entity, mod)
-  if (player.x < 0) {
+  if (player.x - offsetX < 0) {
     player.x = 0
   }
 
-  if (player.x > game.level.width) {
-    player.x = game.level.width
+  if (player.x > (game.level.width - player.width)) {
+    player.x = game.level.width - player.width
   }
 
   if (player.y > canvasHeight) {

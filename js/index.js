@@ -41,11 +41,17 @@ function main () {
   const now = Date.now()
   let delta = now - then
 
+  let missedFrames = 0
   while (delta >= timestep) {
     update(delta / 1000, game)
     translate(game)
     delta -= timestep
-    game.clock += 1
+    game.clock++
+    missedFrames++
+
+    if (missedFrames > 256) {
+      delta = 0
+    }
   }
 
   render()
@@ -56,12 +62,14 @@ function main () {
 
 function translate (game) {
   const { player } = game
+  const { canvasWidth } = canvas
 
-  const xCenter = canvas.canvasWidth / 2
-  const offset = -(xCenter - player.x)
+  const xCenter = canvasWidth / 2
+  game.offsetX = -(xCenter - player.x)
 
-  game.offset = offset
-  // game.entities.forEach((e) => { e.x = e.x - game.offset })
+  if (game.offsetX < 0) game.offsetX = 0
+  if (game.offsetX < 0) game.offsetX = 0
+  if (game.offsetX > game.level.width - canvasWidth) game.offsetX = game.level.width - canvasWidth
 }
 
 // Let's play this game!

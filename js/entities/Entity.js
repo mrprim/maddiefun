@@ -37,8 +37,8 @@ export default class Entity {
   }
 
   render (game) {
-    const { ctx } = game
-    ctx.drawImage(this.image, this.x, this.y)
+    const { ctx, offsetX } = game
+    ctx.drawImage(this.image, this.x - offsetX, this.y)
 //    ctx.strokeRect(this.x, this.y, this.width, this.height)
   }
 }

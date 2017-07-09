@@ -53,7 +53,7 @@ export const detectCollisions = (entity, origin, game) => {
 }
 
 export const detectHorizontalCollisions = (entity, origin, game) => {
-  const entities = game.activeEntities()
+  const entities = game.getActiveEntities()
 
   entities.forEach((e) => {
     if (e === entity) {
@@ -77,7 +77,7 @@ export const detectHorizontalCollisions = (entity, origin, game) => {
 }
 
 export const detectVerticalCollisions = (entity, origin, game) => {
-  const entities = game.activeEntities()
+  const entities = game.getActiveEntities()
 
   entity.supported = false
   entities.forEach((e) => {

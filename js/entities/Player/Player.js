@@ -22,8 +22,6 @@ export default class Player extends SolidEntity {
   }
 
   reset () {
-    this.x = canvasWidth / 2
-    this.y = -40
     this.speedH = 0
     this.speedV = 0
   }

@@ -1,8 +1,10 @@
 import Entity from './Entity'
 
 export default class Gem extends Entity {
-  constructor () {
+  constructor (left, top) {
     super()
+    this.setLeft(left)
+    this.setTop(top)
     this.hover = true
     this.width = 32
     this.height = 32

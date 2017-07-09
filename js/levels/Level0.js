@@ -26,13 +26,13 @@ export default class Level0 extends Level {
     this.entities.push(g0)
   }
   spawnGem (game) {
-    const randomLeftLocation = () => {
-      return Math.floor(Math.random() * canvasWidth + 1)
+    const randomLeftLocation = (g, game) => {
+      return Math.floor(Math.random() * (game.level.width - g.width) + 1)
     }
     var g = new Gem()
     g.setTop(170)
-    g.setLeft(randomLeftLocation())
-    while (g.getLeft() - game.player.getLeft() < 20 && g.getLeft() - game.player.getLeft() > -20) {
+    g.setLeft(randomLeftLocation(g, game))
+    while (g.getLeft() - game.player.getLeft() < 100 && g.getLeft() - game.player.getLeft() > -100) {
       g.setLeft(randomLeftLocation())
     }
     game.entities.push(g)

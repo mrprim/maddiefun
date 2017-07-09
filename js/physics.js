@@ -101,11 +101,9 @@ export const detectVerticalCollisions = (entity, origin, game) => {
   })
 }
 
-export default (entity, mod, game) => {
+function handleLevelBoundingBox (game) {
   const { player, offsetX } = game
-  move(entity, mod, game)
-  fall(entity, mod)
-  friction(entity, mod)
+
   if (player.x - offsetX < 0) {
     player.x = 0
   }
@@ -117,4 +115,11 @@ export default (entity, mod, game) => {
   if (player.y > canvasHeight) {
     player.y = 0
   }
+}
+
+export default (entity, mod, game) => {
+  move(entity, mod, game)
+  fall(entity, mod)
+  friction(entity, mod)
+  handleLevelBoundingBox(game)
 }

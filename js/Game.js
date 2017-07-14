@@ -1,6 +1,7 @@
 import Level0 from './levels/Level0'
 import Scoreboard from './entities/Scoreboard'
 import * as canvas from './canvas'
+import { PLAY } from './constants/gameModes'
 
 export default class Game {
   constructor (player) {
@@ -14,7 +15,7 @@ export default class Game {
     this.score = 0
     this.clock = 0
     this.keysDown = {}
-    this.mode = 'play'
+    this.mode = PLAY
   }
 
   reset () {

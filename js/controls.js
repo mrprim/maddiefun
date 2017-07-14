@@ -1,6 +1,10 @@
-const LEFT = 37
-const RIGHT = 39
+import { PLAY, PAUSE } from './constants/gameModes'
 const ESC = 27
+const SPACE = 32
+const LEFT = 37
+const UP = 38
+const RIGHT = 39
+
 const P = 80
 
 export const registerControls = function (game) {
@@ -15,30 +19,41 @@ export const registerControls = function (game) {
 }
 
 export const handlePlayerInputs = function (game) {
-  const { keysDown, player } = game
+  const { keysDown, player, mode } = game
+
+  pressOnce(P, keysDown, () => {
+    game.mode = game.mode === PAUSE ? PLAY : PAUSE
+  })
 
   pressAndHold(ESC, keysDown, () => {
     game.reset()
   })
 
-  pressOnce(P, keysDown, () => {
-    game.mode = game.mode === 'pause' ? 'play' : 'pause'
-  })
+  if (mode === PLAY) {
+    pressOnce(UP, keysDown, () => {
+      player.jump(game)
+    })
 
-  if (38 in keysDown || 32 in keysDown) { // Player holding up
-    player.jump(game)
+    pressOnce(SPACE, keysDown, () => {
+      player.jump(game)
+    })
+
+    pressAndHold(LEFT, keysDown, () => {
+      player.goLeft()
+    })
+
+    pressAndHold(RIGHT, keysDown, () => {
+      player.goRight()
+    })
   }
 
-  pressAndHold(LEFT, keysDown, () => {
-    player.goLeft()
-  })
+  if (mode === PAUSE) {
 
-  pressAndHold(RIGHT, keysDown, () => {
-    player.goRight()
-  })
+  }
 
   function pressOnce (keyCode, keysDown, cb) {
     const lbl = keyCode + 'Pressed'
+
     if (keyCode in keysDown) {
       if (!keysDown[lbl]) {
         keysDown[lbl] = true
@@ -50,6 +65,8 @@ export const handlePlayerInputs = function (game) {
   }
 
   function pressAndHold (keyCode, keysDown, cb) {
+    if (mode !== game.mode) return
+
     if (keyCode in keysDown) {
       cb()
     }

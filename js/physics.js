@@ -60,7 +60,7 @@ export const detectHorizontalCollisions = (entity, origin, game) => {
       return
     }
 
-    if (origin.top > e.getBottom() || origin.bottom < e.getTop()) {
+    if (origin.top >= e.getBottom() || origin.bottom <= e.getTop()) {
       return
     }
 
@@ -89,12 +89,12 @@ export const detectVerticalCollisions = (entity, origin, game) => {
       return
     }
 
-    if (origin.bottom <= e.getTop() && entity.getBottom() > e.getTop()) {
+    if (origin.bottom <= e.getTop() && entity.getBottom() >= e.getTop()) {
       entity.onCollision('bottom', e, game)
       e.onCollidedWith('top', entity, game)
     }
 
-    if (origin.top >= e.getBottom() && entity.getTop() < e.getBottom()) {
+    if (origin.top >= e.getBottom() && entity.getTop() <= e.getBottom()) {
       entity.onCollision('top', e, game)
       e.onCollidedWith('bottom', entity, game)
     }
@@ -118,8 +118,8 @@ function handleLevelBoundingBox (game) {
 }
 
 export default (entity, mod, game) => {
-  move(entity, mod, game)
   fall(entity, mod)
   friction(entity, mod)
+  move(entity, mod, game)
   handleLevelBoundingBox(game)
 }

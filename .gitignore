@@ -1,5 +1,6 @@
 # Webpack
 bundle
+.vscode/
 
 # Logs
 logs

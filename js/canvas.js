@@ -1,4 +1,4 @@
-export const canvasWidth = 500
+export const canvasWidth = 750
 export const canvasHeight = 500
 
 export function init () {

@@ -4,7 +4,10 @@ import { PLAY } from './constants/gameModes'
 
 export default function (mod, game) {
   if (game.mode === PLAY) {
-    game.getActiveEntities().forEach(e => physics(e, mod, game))
+    game.getActiveEntities().forEach(e => {
+      physics(e, mod, game)
+      if (typeof e.runAi === 'function') e.runAi(game)
+    })
   }
 
   handlePlayerInputs(game)

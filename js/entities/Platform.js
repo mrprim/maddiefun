@@ -14,6 +14,7 @@ export default class Platform extends SolidEntity {
   render (game) {
     const { ctx, offsetX } = game
 
+    ctx.fillStyle = 'black'
     ctx.fillRect(this.getLeft() - offsetX, this.getTop(), this.width, this.height)
   }
 }

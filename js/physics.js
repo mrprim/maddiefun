@@ -27,7 +27,7 @@ export const fall = (entity) => {
     entity.speedV = entity.speedV > 0 ? entity.speedV : 0
     return
   }
-  entity.speedV -= gravityMod
+  entity.speedV -= (entity.gravityMod || gravityMod)
 }
 
 export const friction = (entity, mod) => {

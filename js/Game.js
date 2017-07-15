@@ -1,4 +1,5 @@
 import Level0 from './levels/Level0'
+import Level1 from './levels/Level1'
 import Scoreboard from './entities/Scoreboard'
 import * as canvas from './canvas'
 import { PLAY } from './constants/gameModes'
@@ -9,9 +10,10 @@ export default class Game {
     this.scoreboard = new Scoreboard()
     this.ctx = canvas.init()
     this.levels = [
-      new Level0()
+      new Level0(),
+      new Level1()
     ]
-    this.level = this.levels[0]
+    this.level = this.levels[1]
     this.score = 0
     this.clock = 0
     this.keysDown = {}

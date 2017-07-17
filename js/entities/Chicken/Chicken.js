@@ -1,6 +1,7 @@
 import sprite from './sprite'
 import SolidEntity from '../SolidEntity'
 import Player from '../Player/Player'
+import follow from '../../ai/follow'
 
 export default class Chicken extends SolidEntity {
   constructor (left, top) {
@@ -18,7 +19,9 @@ export default class Chicken extends SolidEntity {
   runAi (game) {
     const { player } = game
 
-    if (this.supported) {
+    follow(this, player)
+
+    if (this.supported && false) {
       if (Math.random() > 0.90) {
         this.jump()
       }
@@ -39,9 +42,7 @@ export default class Chicken extends SolidEntity {
     }
   }
 
-  render (game) {
-    const { ctx, offsetX } = game
-
+  render ({ ctx, offsetX }) {
     ctx.fillStyle = 'blue'
     ctx.fillRect(this.x - offsetX, this.y, this.width, this.height)
   }

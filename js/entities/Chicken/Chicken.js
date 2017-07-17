@@ -1,13 +1,12 @@
 import sprite from './sprite'
-import SolidEntity from '../SolidEntity'
+import Mob from '../Mob'
 import Player from '../Player/Player'
 import follow from '../../ai/follow'
 
-export default class Chicken extends SolidEntity {
+export default class Chicken extends Mob {
   constructor (left, top) {
-    super()
-    this.setLeft(left)
-    this.setTop(top)
+    super(left, top)
+
     this.jumpSpeed = 55
     this.width = 16
     this.height = 16
@@ -75,18 +74,4 @@ export default class Chicken extends SolidEntity {
   }
 
   onCollidedWithBottom (collider) {}
-
-  jump (game) {
-    if (this.supported) {
-      this.speedV = this.jumpSpeed
-    }
-  }
-
-  goLeft () {
-    this.speedH = -this.speed
-  }
-
-  goRight () {
-    this.speedH = this.speed
-  }
 }

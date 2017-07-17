@@ -1,9 +1,9 @@
 import { canvasHeight } from '../canvas'
 
 export default class Entity {
-  constructor () {
-    this.x = 0
-    this.y = 0
+  constructor (left = 0, top = 0) {
+    this.setLeft(left)
+    this.setTop(top)
     this.speed = 0
     this.speedV = 0
     this.speedH = 0

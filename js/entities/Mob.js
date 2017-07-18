@@ -28,6 +28,13 @@ export default class Chicken extends SolidEntity {
     }
   }
 
+  stomp (game) {
+    if (!this.supported && this.speedV < 0) {
+      this.speedV = this.jumpSpeed * -2
+      this.speedH = 0
+    }
+  }
+
   goLeft () {
     if (this.supported) {
       this.speedH = this.speedH - this.acceleration

@@ -17,7 +17,7 @@ export default class Chicken extends Mob {
     this.gravityMod = 5
   }
 
-  runAi (game) {
+  ai (game) {
     const { player } = game
 
     follow(this, player)

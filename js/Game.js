@@ -49,7 +49,7 @@ export default class Game {
     canvas.clear(this.ctx)
     this.getActiveEntities().forEach(e => e.render(g))
     this.ctx.fillStyle = 'rgba(12, 12, 12, .1'
-    this.ctx.fillRect(0, 0, canvas.canvasHeight, canvas.canvasWidth)
+    this.ctx.fillRect(0, 0, canvas.canvasWidth, canvas.canvasHeight)
   }
 
   scroll () {

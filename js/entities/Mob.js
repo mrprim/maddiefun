@@ -35,7 +35,7 @@ export default class Chicken extends SolidEntity {
     }
   }
 
-  goLeft () {
+  moveLeft () {
     if (this.supported) {
       this.speedH = this.speedH - this.acceleration
       this.speedH = this.speedH < -this.maxSpeed ? -this.maxSpeed : this.speedH
@@ -45,7 +45,7 @@ export default class Chicken extends SolidEntity {
     }
   }
 
-  goRight () {
+  moveRight () {
     if (this.supported) {
       this.speedH = this.speedH + this.acceleration
       this.speedH = this.speedH > this.maxSpeed ? this.maxSpeed : this.speedH

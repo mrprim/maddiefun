@@ -1,7 +1,7 @@
 export default (entity, target) => {
   if (target.x < entity.x) {
-    entity.goLeft()
+    entity.moveLeft()
   } else {
-    entity.goRight()
+    entity.moveRight()
   }
 }

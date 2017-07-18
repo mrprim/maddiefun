@@ -1,12 +1,5 @@
 import { PLAY, PAUSE } from './constants/gameModes'
-const ESC = 27
-const SPACE = 32
-const LEFT = 37
-const UP = 38
-const RIGHT = 39
-const DOWN = 40
-
-const P = 80
+import * as kc from './constants/keyCodes'
 
 export const registerControls = function (game) {
   const { keysDown } = game
@@ -22,32 +15,32 @@ export const registerControls = function (game) {
 export const handlePlayerInputs = function (game) {
   const { keysDown, player, mode } = game
 
-  pressOnce(P, keysDown, () => {
+  pressOnce(kc.P, keysDown, () => {
     game.mode = game.mode === PAUSE ? PLAY : PAUSE
   })
 
-  pressAndHold(ESC, keysDown, () => {
+  pressAndHold(kc.ESC, keysDown, () => {
     game.reset()
   })
 
   if (mode === PLAY) {
-    pressOnce(UP, keysDown, () => {
+    pressOnce(kc.UP, keysDown, () => {
       player.jump(game)
     })
 
-    pressOnce(SPACE, keysDown, () => {
+    pressOnce(kc.SPACE, keysDown, () => {
       player.jump(game)
     })
 
-    pressAndHold(LEFT, keysDown, () => {
-      player.goLeft()
+    pressAndHold(kc.LEFT, keysDown, () => {
+      player.moveLeft()
     })
 
-    pressAndHold(RIGHT, keysDown, () => {
-      player.goRight()
+    pressAndHold(kc.RIGHT, keysDown, () => {
+      player.moveRight()
     })
 
-    pressAndHold(DOWN, keysDown, () => {
+    pressAndHold(kc.DOWN, keysDown, () => {
       player.stomp()
     })
   }

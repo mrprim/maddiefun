@@ -13,7 +13,7 @@ export default class Game {
       new Level0(),
       new Level1()
     ]
-    this.level = this.levels[1]
+    this.level = this.levels[0]
     this.score = 0
     this.clock = 0
     this.keysDown = {}

@@ -1,7 +1,7 @@
 export default class Level {
   constructor () {
     this.entities = []
-    this.width = 3000
+    this.width = 1500
     this.spawnX = 50
     this.spawnY = 0
   }

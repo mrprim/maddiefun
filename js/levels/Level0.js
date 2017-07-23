@@ -18,7 +18,7 @@ export default class Level0 extends Level {
       new Platform(400, 380, 275, 44),
       new Platform(500, 310, 50, 5),
       new Platform(0, 300, 600, 5),
-      new Platform(700, 300, 600, 5),
+      new Platform(700, 300, 1000, 5),
       new Gem(100, 170)
     ]
   }

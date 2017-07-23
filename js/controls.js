@@ -4,12 +4,10 @@ import * as kc from './constants/keyCodes'
 export const registerControls = function (game) {
   const { keysDown } = game
   window.addEventListener('keydown', function (e) {
-    e.preventDefault()
     keysDown[e.keyCode] = true
   }, false)
 
   window.addEventListener('keyup', function (e) {
-    e.preventDefault()
     delete keysDown[e.keyCode]
   }, false)
 

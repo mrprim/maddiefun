@@ -49,18 +49,18 @@ export default class Game {
     canvas.clear(this.ctx)
     this.getActiveEntities().forEach(e => e.render(g))
     this.ctx.fillStyle = 'rgba(12, 12, 12, .9)'
-    this.ctx.fillRect(0, 0, canvas.canvasWidth, canvas.canvasHeight)
+    this.ctx.fillRect(0, 0, canvas.getCanvasWidth(), canvas.canvasHeight)
   }
 
   scroll () {
     const { player } = this
-    const { canvasWidth } = canvas
+    const { getCanvasWidth } = canvas
 
-    const xCenter = canvasWidth / 2
+    const xCenter = getCanvasWidth() / 2
     this.offsetX = -(xCenter - player.x)
 
     if (this.offsetX < 0) this.offsetX = 0
     if (this.offsetX < 0) this.offsetX = 0
-    if (this.offsetX > this.level.width - canvasWidth) this.offsetX = this.level.width - canvasWidth
+    if (this.offsetX > this.level.width - getCanvasWidth()) this.offsetX = this.level.width - getCanvasWidth()
   }
 }

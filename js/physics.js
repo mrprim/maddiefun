@@ -1,4 +1,4 @@
-import { canvasWidth, canvasHeight } from './canvas'
+import { canvasHeight } from './canvas'
 
 const gravityMod = 30
 const frictionMod = 15

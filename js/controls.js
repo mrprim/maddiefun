@@ -1,4 +1,3 @@
-import { canvasWidth } from './canvas'
 import { PLAY, PAUSE } from './constants/gameModes'
 import * as kc from './constants/keyCodes'
 

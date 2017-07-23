@@ -1,7 +1,6 @@
 import Level from './Level'
 import Platform from '../entities/Platform'
-import Gem from '../entities/Gem'
-import Chicken from '../entities/Chicken/Chicken'
+import Enemy from '../entities/Enemy/Enemy'
 
 export default class Level1 extends Level {
   constructor () {
@@ -12,15 +11,20 @@ export default class Level1 extends Level {
 
   resetEntities () {
     this.entities = [
-      new Platform(0, 400, 1750, 24),
-      new Chicken(30, 170),
-      new Chicken(60, 170),
-      new Chicken(90, 170),
-      new Chicken(120, 170),
-      new Chicken(150, 170),
-      new Chicken(180, 170),
-      new Chicken(210, 170),
-      new Chicken(240, 170)
+      new Platform(-250, 400, 1750, 24),
+      new Platform(100, 350, 100, 1),
+      new Platform(300, 350, 100, 1),
+      new Platform(500, 350, 100, 1),
+      new Platform(700, 350, 100, 1),
+      new Platform(900, 350, 100, 1),
+      new Enemy(30, 170),
+      new Enemy(60, 170),
+      new Enemy(90, 170),
+      new Enemy(120, 170),
+      new Enemy(150, 170),
+      new Enemy(180, 170),
+      new Enemy(210, 170),
+      new Enemy(240, 170)
     ]
   }
 }

@@ -48,7 +48,7 @@ export default class Game {
   renderpause (g) {
     canvas.clear(this.ctx)
     this.getActiveEntities().forEach(e => e.render(g))
-    this.ctx.fillStyle = 'rgba(12, 12, 12, .1'
+    this.ctx.fillStyle = 'rgba(12, 12, 12, .9)'
     this.ctx.fillRect(0, 0, canvas.canvasWidth, canvas.canvasHeight)
   }
 

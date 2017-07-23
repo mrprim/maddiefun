@@ -5,23 +5,30 @@ import * as kc from './constants/keyCodes'
 export const registerControls = function (game) {
   const { keysDown } = game
   window.addEventListener('keydown', function (e) {
+    e.preventDefault()
     keysDown[e.keyCode] = true
   }, false)
 
   window.addEventListener('keyup', function (e) {
+    e.preventDefault()
     delete keysDown[e.keyCode]
   }, false)
 
   document.getElementById('game').addEventListener('touchstart', function (e) {
-    keysDown['touch'] = e.targetTouches[0]
+    e.preventDefault()
+    keysDown.touch = e.targetTouches[0]
   }, false)
 
   document.getElementById('game').addEventListener('touchmove', function (e) {
-    keysDown['touch'] = e.targetTouches[0]
+    e.preventDefault()
+    keysDown.touchLast = keysDown.touch
+    keysDown.touch = e.targetTouches[0]
   }, false)
 
   document.getElementById('game').addEventListener('touchend', function (e) {
-    delete keysDown['touch']
+    e.preventDefault()
+    delete keysDown.touch
+    delete keysDown.touchLast
   }, false)
 }
 
@@ -59,7 +66,14 @@ export const handlePlayerInputs = function (game) {
       const canvasLeft = document.getElementById('game').getBoundingClientRect().left
 
       const touchX = keysDown.touch.pageX - canvasLeft
-      const playerX = game.player.x - game.offsetX
+      const playerX = player.x - game.offsetX
+
+      if (keysDown.touchLast) {
+        if (keysDown.touchLast.pageY - keysDown.touch.pageY > 10) {
+          player.jump(game, 8)
+        }
+      }
+
       if (touchX < playerX) {
         player.moveLeft()
       }

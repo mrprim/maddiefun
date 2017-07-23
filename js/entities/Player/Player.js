@@ -14,7 +14,6 @@ export default class Player extends Mob {
 
   jump (game, mod) {
     if (this.supported) {
-      console.log(mod)
       this.speedV = this.jumpSpeed * (mod / 8)
     }
   }

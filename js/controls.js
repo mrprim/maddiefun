@@ -1,3 +1,4 @@
+import { canvasWidth } from './canvas'
 import { PLAY, PAUSE } from './constants/gameModes'
 import * as kc from './constants/keyCodes'
 
@@ -11,13 +12,15 @@ export const registerControls = function (game) {
     delete keysDown[e.keyCode]
   }, false)
 
-  window.addEventListener('touchstart', function (e) {
-    console.log(e)
-    keysDown['touch'] = true
+  document.getElementById('game').addEventListener('touchstart', function (e) {
+    keysDown['touch'] = e.targetTouches[0]
   }, false)
 
-  window.addEventListener('touchend', function (e) {
-    console.log(e)
+  document.getElementById('game').addEventListener('touchmove', function (e) {
+    keysDown['touch'] = e.targetTouches[0]
+  }, false)
+
+  document.getElementById('game').addEventListener('touchend', function (e) {
     delete keysDown['touch']
   }, false)
 }
@@ -34,7 +37,7 @@ export const handlePlayerInputs = function (game) {
   })
 
   if (mode === PLAY) {
-    [kc.UP, kc.SPACE, 'touch'].forEach(x => {
+    [kc.UP, kc.SPACE].forEach(x => {
       pressDynamic(x, keysDown, 8, (mod) => {
         player.jump(game, mod)
       })
@@ -51,6 +54,20 @@ export const handlePlayerInputs = function (game) {
     pressAndHold(kc.DOWN, keysDown, () => {
       player.stomp()
     })
+
+    if (keysDown.touch) {
+      const canvasLeft = document.getElementById('game').getBoundingClientRect().left
+
+      const touchX = keysDown.touch.pageX - canvasLeft
+      const playerX = game.player.x - game.offsetX
+      if (touchX < playerX) {
+        player.moveLeft()
+      }
+
+      if (touchX > playerX) {
+        player.moveRight()
+      }
+    }
   }
 
   if (mode === PAUSE) {

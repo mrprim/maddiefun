@@ -10,6 +10,16 @@ export const registerControls = function (game) {
   window.addEventListener('keyup', function (e) {
     delete keysDown[e.keyCode]
   }, false)
+
+  window.addEventListener('touchstart', function (e) {
+    console.log(e)
+    keysDown['touch'] = true
+  }, false)
+
+  window.addEventListener('touchend', function (e) {
+    console.log(e)
+    delete keysDown['touch']
+  }, false)
 }
 
 export const handlePlayerInputs = function (game) {
@@ -24,12 +34,10 @@ export const handlePlayerInputs = function (game) {
   })
 
   if (mode === PLAY) {
-    pressOnce(kc.UP, keysDown, () => {
-      player.jump(game)
-    })
-
-    pressOnce(kc.SPACE, keysDown, () => {
-      player.jump(game)
+    [kc.UP, kc.SPACE, 'touch'].forEach(x => {
+      pressDynamic(x, keysDown, 8, (mod) => {
+        player.jump(game, mod)
+      })
     })
 
     pressAndHold(kc.LEFT, keysDown, () => {
@@ -63,10 +71,27 @@ export const handlePlayerInputs = function (game) {
   }
 
   function pressAndHold (keyCode, keysDown, cb) {
-    if (mode !== game.mode) return
-
     if (keyCode in keysDown) {
       cb()
+    }
+  }
+
+  function pressDynamic (keyCode, keysDown, max, cb) {
+    const lbl = keyCode + 'Duration'
+    let duration = keysDown[lbl] || 0
+    if (keyCode in keysDown) {
+      duration++
+      keysDown[lbl] = duration
+
+      if (duration >= max) {
+        cb(duration)
+        delete keysDown[lbl]
+      }
+    } else {
+      if (keysDown[lbl]) {
+        cb(duration)
+      }
+      delete keysDown[lbl]
     }
   }
 }

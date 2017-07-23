@@ -12,6 +12,13 @@ export default class Player extends Mob {
     this.sprite = sprite(this)
   }
 
+  jump (game, mod) {
+    if (this.supported) {
+      console.log(mod)
+      this.speedV = this.jumpSpeed * (mod / 8)
+    }
+  }
+
   render (game) {
     const { ctx, offsetX } = game
 

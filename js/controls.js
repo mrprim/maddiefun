@@ -44,6 +44,10 @@ export const handlePlayerInputs = function (game) {
     pressOnce(kc.ENTER, keysDown, () => {
       game.mode = PLAY
     })
+    
+    if (keysDown.touch) {
+      game.mode = PLAY
+    }
   }
   if (mode === PLAY) {
     [kc.UP, kc.SPACE].forEach(x => {

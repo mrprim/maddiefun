@@ -2,7 +2,7 @@ import Level0 from './levels/Level0'
 import Level1 from './levels/Level1'
 import Scoreboard from './entities/Scoreboard'
 import * as canvas from './canvas'
-import { PLAY } from './constants/gameModes'
+import { INTRO } from './constants/gameModes'
 
 export default class Game {
   constructor (player) {
@@ -17,7 +17,7 @@ export default class Game {
     this.score = 0
     this.clock = 0
     this.keysDown = {}
-    this.mode = PLAY
+    this.mode = INTRO
   }
 
   reset () {
@@ -38,6 +38,13 @@ export default class Game {
   render () {
     var g = this
     this['render' + this.mode](g)
+  }
+
+  renderintro (g) {
+    canvas.clear(this.ctx)
+    this.getActiveEntities().forEach(e => e.render(g))
+    this.ctx.fillStyle = 'rgba(12, 12, 12, .9)'
+    this.ctx.fillRect(0, 0, canvas.getCanvasWidth(), canvas.canvasHeight)
   }
 
   renderplay (g) {

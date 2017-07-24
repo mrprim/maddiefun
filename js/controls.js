@@ -1,4 +1,4 @@
-import { PLAY, PAUSE } from './constants/gameModes'
+import { PLAY, PAUSE, INTRO } from './constants/gameModes'
 import * as kc from './constants/keyCodes'
 
 export const registerControls = function (game) {
@@ -40,6 +40,11 @@ export const handlePlayerInputs = function (game) {
     game.reset()
   })
 
+  if (mode === INTRO) {
+    pressOnce(kc.ENTER, keysDown, () => {
+      game.mode = PLAY
+    })
+  }
   if (mode === PLAY) {
     [kc.UP, kc.SPACE].forEach(x => {
       pressDynamic(x, keysDown, 8, (mod) => {

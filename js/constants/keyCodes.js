@@ -1,3 +1,4 @@
+export const ENTER = 13
 export const ESC = 27
 export const SPACE = 32
 
@@ -9,5 +10,5 @@ export const DOWN = 40
 export const P = 80
 
 export default {
-  ESC, SPACE, LEFT, UP, RIGHT, DOWN, P
+  ENTER, ESC, SPACE, LEFT, UP, RIGHT, DOWN, P
 }

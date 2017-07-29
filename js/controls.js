@@ -11,6 +11,17 @@ export const registerControls = function (game) {
     delete keysDown[e.keyCode]
   }, false)
 
+  document.getElementById('game').addEventListener('mousedown', function (e) {
+    e.preventDefault()
+    console.log(e)
+    keysDown.click = e
+  }, false)
+
+  document.getElementById('game').addEventListener('mouseup', function (e) {
+    e.preventDefault()
+    delete keysDown.click
+  }, false)
+
   document.getElementById('game').addEventListener('touchstart', function (e) {
     e.preventDefault()
     keysDown.touch = e.targetTouches[0]

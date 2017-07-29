@@ -1,5 +1,3 @@
-import { canvasHeight } from '../canvas'
-
 export default class Entity {
   constructor (left = 0, top = 0) {
     this.setLeft(left)

@@ -1,13 +1,14 @@
 import Level0 from './levels/Level0'
 import Level1 from './levels/Level1'
-import Scoreboard from './entities/Scoreboard'
+import scoreboard from './gui/scoreboard'
+import startScreen from './gui/startScreen'
+import pauseScreen from './gui/pauseScreen'
 import * as canvas from './canvas'
 import { INTRO } from './constants/gameModes'
 
 export default class Game {
   constructor (player) {
     this.player = player
-    this.scoreboard = new Scoreboard()
     this.ctx = canvas.init()
     this.levels = [
       new Level0(),
@@ -28,7 +29,7 @@ export default class Game {
   }
 
   getEntities () {
-    return this.level.entities.concat(this.player).concat(this.scoreboard)
+    return this.level.entities.concat(this.player)
   }
 
   getActiveEntities () {
@@ -45,11 +46,13 @@ export default class Game {
     this.getActiveEntities().forEach(e => e.render(g))
     this.ctx.fillStyle = 'rgba(12, 12, 12, .9)'
     this.ctx.fillRect(0, 0, canvas.getCanvasWidth(), canvas.canvasHeight)
+    startScreen(g)
   }
 
   renderplay (g) {
     canvas.clear(this.ctx)
     this.getActiveEntities().forEach(e => e.render(g))
+    scoreboard(g)
   }
 
   renderpause (g) {
@@ -57,6 +60,7 @@ export default class Game {
     this.getActiveEntities().forEach(e => e.render(g))
     this.ctx.fillStyle = 'rgba(12, 12, 12, .9)'
     this.ctx.fillRect(0, 0, canvas.getCanvasWidth(), canvas.canvasHeight)
+    pauseScreen(g)
   }
 
   scroll () {

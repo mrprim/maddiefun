@@ -13,30 +13,29 @@ export const registerControls = function (game) {
 
   document.getElementById('game').addEventListener('mousedown', function (e) {
     e.preventDefault()
-    console.log(e)
-    keysDown.click = e
+    keysDown[kc.CLICK] = e
   }, false)
 
   document.getElementById('game').addEventListener('mouseup', function (e) {
     e.preventDefault()
-    delete keysDown.click
+    delete keysDown[kc.CLICK]
   }, false)
 
   document.getElementById('game').addEventListener('touchstart', function (e) {
     e.preventDefault()
-    keysDown.touch = e.targetTouches[0]
+    keysDown[kc.TOUCH] = e.targetTouches[0]
   }, false)
 
   document.getElementById('game').addEventListener('touchmove', function (e) {
     e.preventDefault()
-    keysDown.touchLast = keysDown.touch
-    keysDown.touch = e.targetTouches[0]
+    keysDown[kc.LAST_TOUCH] = keysDown.touch
+    keysDown[kc.TOUCH] = e.targetTouches[0]
   }, false)
 
   document.getElementById('game').addEventListener('touchend', function (e) {
     e.preventDefault()
-    delete keysDown.touch
-    delete keysDown.touchLast
+    delete keysDown[kc.TOUCH]
+    delete keysDown[kc.LAST_TOUCH]
   }, false)
 }
 
@@ -52,14 +51,13 @@ export const handlePlayerInputs = function (game) {
   })
 
   if (mode === INTRO) {
-    pressOnce(kc.ENTER, keysDown, () => {
-      game.mode = PLAY
+    [kc.ENTER, kc.SPACE, kc.TOUCH, kc.CLICK].forEach(x => {
+      pressOnce(x, keysDown, () => {
+        game.mode = PLAY
+      })
     })
-    
-    if (keysDown.touch) {
-      game.mode = PLAY
-    }
   }
+
   if (mode === PLAY) {
     [kc.UP, kc.SPACE].forEach(x => {
       pressDynamic(x, keysDown, 8, (mod) => {
@@ -79,14 +77,16 @@ export const handlePlayerInputs = function (game) {
       player.stomp()
     })
 
-    if (keysDown.touch) {
+    if (keysDown[kc.TOUCH]) {
+      const touch = keysDown[kc.TOUCH]
+      const lastTouch = keysDown[kc.LAST_TOUCH]
       const canvasLeft = document.getElementById('game').getBoundingClientRect().left
 
-      const touchX = keysDown.touch.pageX - canvasLeft
+      const touchX = touch.pageX - canvasLeft
       const playerX = player.x - game.offsetX
 
-      if (keysDown.touchLast) {
-        if (keysDown.touchLast.pageY - keysDown.touch.pageY > 10) {
+      if (lastTouch) {
+        if (lastTouch.pageY - touch.pageY > 10) {
           player.jump(game, 8)
         }
       }

@@ -1,3 +1,7 @@
+export const TOUCH = 'touch'
+export const LAST_TOUCH = 'lastTouch'
+export const CLICK = 'click'
+
 export const ENTER = 13
 export const ESC = 27
 export const SPACE = 32
